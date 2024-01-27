@@ -14,7 +14,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_gemini_summary(pdf_text, prompt):
     model = genai.GenerativeModel('gemini-pro-vision')
     response = model.generate_content([pdf_text, prompt])
-    return response.text
+    return response['text']
 
 # This Function will extract text from PDF
 def extract_text_from_pdf(uploaded_file):
@@ -33,7 +33,6 @@ def extract_text_from_pdf(uploaded_file):
 st.set_page_config(page_title="RapidReader")
 st.header("RapidReader")
 
-input_text = st.text_area("Prompt for PDF Summary: ", key="input")
 uploaded_file = st.file_uploader("Upload your PDF...", type=["pdf"])
 
 if uploaded_file is not None:
